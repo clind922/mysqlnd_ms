@@ -42,7 +42,11 @@
 #include "mysqlnd_fabric.h"
 #include "mysqlnd_fabric_priv.h"
 
+#if PHP_VERSION_ID < 80400
 #include "ext/standard/php_rand.h"
+#else
+#include "ext/random/php_random.h"
+#endif
 
 extern const myslqnd_fabric_strategy mysqlnd_fabric_strategy_direct;
 extern const myslqnd_fabric_strategy mysqlnd_fabric_strategy_dump;
