@@ -34,7 +34,11 @@
 #endif
 #include "mysqlnd_ms.h"
 #include "mysqlnd_ms_config_json.h"
+#if PHP_VERSION_ID < 80400
 #include "ext/standard/php_rand.h"
+#else
+#include "ext/random/php_random.h"
+#endif
 #include "mysqlnd_ms_filter_qos.h"
 #include "mysqlnd_ms_switch.h"
 #include "fabric/mysqlnd_fabric.h"
