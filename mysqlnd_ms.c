@@ -5605,7 +5605,9 @@ MYSQLND_METHOD(mysqlnd_ms_stmt, execute)(MYSQLND_STMT * const s TSRMLS_DC)
 				ret = FAIL;
 			} else {
 				stmt_to_prepare->execute_count = stmt->execute_count;
+#if PHP_VERSION_ID < 80400
 				stmt_to_prepare->prefetch_rows = stmt->prefetch_rows;
+#endif
 				stmt_to_prepare->flags = stmt->flags;
 				stmt_to_prepare->update_max_length = stmt->update_max_length;
 			}
