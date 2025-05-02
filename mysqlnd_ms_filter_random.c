@@ -385,7 +385,7 @@ mysqlnd_ms_choose_connection_random_use_slave_aux(const zend_llist * const maste
 			MYSQLND_MS_FILTER_LB_WEIGHT_IN_CONTEXT ** lb_weight_context_pp = NULL;
 			unsigned int i = 0;
 			unsigned long rnd_idx;
-			rnd_idx = php_rand(TSRMLS_C);
+			rnd_idx = php_mt_rand(TSRMLS_C);
 			RAND_RANGE(rnd_idx, 1, total_weight, PHP_RAND_MAX);
 			DBG_INF_FMT("USE_SLAVE weighted, rnd_idx=%lu", rnd_idx);
 			for (
@@ -404,7 +404,7 @@ mysqlnd_ms_choose_connection_random_use_slave_aux(const zend_llist * const maste
 		} else {
 			unsigned int i = 0;
 			unsigned long rnd_idx;
-			rnd_idx = php_rand(TSRMLS_C);
+			rnd_idx = php_mt_rand(TSRMLS_C);
 			RAND_RANGE(rnd_idx, 0, zend_llist_count(l) - 1, PHP_RAND_MAX);
 			DBG_INF_FMT("USE_SLAVE rnd_idx=%lu", rnd_idx);
 			element_pp = (MYSQLND_MS_LIST_DATA **) zend_llist_get_first_ex(l, &pos);
@@ -633,7 +633,7 @@ mysqlnd_ms_choose_connection_random_use_master_aux(zend_llist * master_connectio
 	}
 
 	while (zend_llist_count(l) > 0) {
-		unsigned long rnd_idx = php_rand(TSRMLS_C);
+		unsigned long rnd_idx = php_mt_rand(TSRMLS_C);
 		retry_count++;
 
 		if (use_lb_context) {
