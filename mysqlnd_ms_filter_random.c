@@ -35,7 +35,11 @@
 #include "ext/mysqlnd/mysqlnd_connection.h"
 #endif
 #include "mysqlnd_ms.h"
+#if PHP_VERSION_ID < 80400
 #include "ext/standard/php_rand.h"
+#else
+#include "ext/random/php_random.h"
+#endif
 #include "mysqlnd_ms_enum_n_def.h"
 #include "mysqlnd_ms_switch.h"
 #include "mysqlnd_ms_config_json.h"
