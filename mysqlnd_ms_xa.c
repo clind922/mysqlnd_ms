@@ -1104,7 +1104,7 @@ void mysqlnd_ms_xa_gc_hash_dtor(_ms_hash_zval_type * pDest) {
 	TSRMLS_FETCH();
 
 	if (gc && gc->store.data) {
-		rnd_idx = php_rand(TSRMLS_C);
+		rnd_idx = php_mt_rand(TSRMLS_C);
 		RAND_RANGE(rnd_idx, 1, 1000, PHP_RAND_MAX);
 		if (gc->gc_probability >= rnd_idx) {
 			gc->store.garbage_collect_all(gc->store.data, NULL, gc->gc_max_retries, gc->gc_max_trx_per_run TSRMLS_CC);
