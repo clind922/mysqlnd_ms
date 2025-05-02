@@ -24,7 +24,11 @@
 #include "main/spprintf.h"
 #include "main/php_streams.h"
 
+#if PHP_VERSION_ID < 80400
 #include "ext/standard/php_rand.h"
+#else
+#include "ext/random/php_random.h"
+#endif
 
 #include "ext/mysqlnd/mysqlnd.h"
 #include "ext/mysqlnd/mysqlnd_priv.h"
