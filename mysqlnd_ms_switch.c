@@ -39,7 +39,11 @@
 #include "ext/mysqlnd/mysqlnd_alloc.h"
 #endif
 #include "mysqlnd_ms.h"
+#if PHP_VERSION_ID < 80400
 #include "ext/standard/php_rand.h"
+#else
+#include "ext/random/php_random.h"
+#endif
 
 #include "mysqlnd_query_parser.h"
 #include "mysqlnd_qp.h"
