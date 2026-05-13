@@ -30,8 +30,10 @@
 #endif
 #if PHP_MAJOR_VERSION < 7
 #include "ext/standard/php_smart_str.h"
-#else
+#elif PHP_VERSION_ID < 80500
 #include "ext/standard/php_smart_string.h"
+#else
+#include "zend_smart_string.h"
 #endif
 #if PHP_VERSION_ID >= 70100
 #include "ext/mysqlnd/mysqlnd_connection.h"
