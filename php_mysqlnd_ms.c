@@ -448,11 +448,13 @@ static PHP_FUNCTION(mysqlnd_ms_get_last_used_connection)
 		MYSQLND_MS_ADD_ASSOC_STRING(return_value, "host_info", conn->host_info);
 #if PHP_VERSION_ID < 70100
 		MYSQLND_MS_ADD_ASSOC_CONN_STRING(return_value, "host", conn->host);
-#else
+#elif PHP_VERSION_ID < 80500
 		MYSQLND_MS_ADD_ASSOC_CONN_STRING(return_value, "host", conn->hostname);
 #endif
 		MYSQLND_MS_ADD_ASSOC_LONG(return_value, "port", conn->port);
+#if PHP_VERSION_ID < 80500
 		MYSQLND_MS_ADD_ASSOC_CONN_STRING(return_value, "socket_or_pipe", conn->unix_socket);
+#endif
 		MYSQLND_MS_ADD_ASSOC_LONG(return_value, "thread_id", conn->thread_id);
 		MYSQLND_MS_ADD_ASSOC_CONN_STRING(return_value, "last_message", conn->last_message);
 		MYSQLND_MS_ADD_ASSOC_LONG(return_value, "errno", MYSQLND_MS_ERROR_INFO(conn).error_no);
