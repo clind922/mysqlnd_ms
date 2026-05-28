@@ -498,8 +498,8 @@ mysqlnd_ms_xa_store_mysql_add_participant(void * data, MYSQLND_ERROR_INFO * erro
 
 	mysqlnd_ms_xa_state_to_string(participant->state, &state);
 
-	if (MYSQLND_MS_CONN_STRING(MYSQLND_MS_CONN_HOST(participant->conn))) {
-		host = MYSQLND_MS_CONN_STRING(MYSQLND_MS_CONN_HOST(participant->conn));
+	if (store_data->host) {
+		host = store_data->host;
 	} else {
 		if (localhost_ip)
 			host = (char *)localhost_ip;
@@ -524,11 +524,11 @@ mysqlnd_ms_xa_store_mysql_add_participant(void * data, MYSQLND_ERROR_INFO * erro
 							(MYSQLND_MS_CONN_STRING(participant->conn->scheme)) ? MYSQLND_MS_CONN_STRING(participant->conn->scheme) : "",
 							(host) ? host : "",
 							(participant->conn->port),
-							(MYSQLND_MS_CONN_STRING(participant->conn->unix_socket)) ? MYSQLND_MS_CONN_STRING(participant->conn->unix_socket) : "",
+							(store_data->socket) ? store_data->socket : "",
 							state.c,
 							participant->conn->thread_id,
-							(MYSQLND_MS_CONN_STRING(MYSQLND_MS_CONN_USER(participant->conn))) ? MYSQLND_MS_CONN_STRING(MYSQLND_MS_CONN_USER(participant->conn)) : "",
-							(MYSQLND_MS_CONN_STRING(MYSQLND_MS_CONN_PASS(participant->conn))) ? MYSQLND_MS_CONN_STRING(MYSQLND_MS_CONN_PASS(participant->conn)) : "");
+							(store_data->user) ? store_data->user : "",
+							(store_data->password) ? store_data->password : "");
 	} else {
 		sql_len = spprintf(&sql, 0,
 						"INSERT INTO %s"
@@ -544,7 +544,7 @@ mysqlnd_ms_xa_store_mysql_add_participant(void * data, MYSQLND_ERROR_INFO * erro
 							(MYSQLND_MS_CONN_STRING(participant->conn->scheme)) ? MYSQLND_MS_CONN_STRING(participant->conn->scheme) : "",
 							(host) ? host : "",
 							(participant->conn->port),
-							(MYSQLND_MS_CONN_STRING(participant->conn->unix_socket)) ? MYSQLND_MS_CONN_STRING(participant->conn->unix_socket) : "",
+							(store_data->socket) ? store_data->socket : "",
 							state.c,
 							participant->conn->thread_id);
 	}
