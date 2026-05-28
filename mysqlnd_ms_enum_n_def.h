@@ -319,10 +319,8 @@ static zend_always_inline int _ms_hash_str_get_current_key(HashTable *ht, char *
 #define _ms_mysqlnd_error_info_init(error_info) mysqlnd_error_info_init(error_info, 0)
 #define _ms_mysqlnd_error_info_free_contents(error_info) mysqlnd_error_info_free_contents(error_info)
 
-#if PHP_VERSION_ID < 80500
 #define MYSQLND_MS_CONN_STRING(conn_str) (conn_str).s
 #define MYSQLND_MS_CONN_STRING_LEN(conn_str) (conn_str).l
-#endif
 #define MYSQLND_MS_CONN_D_STRINGL(conn_str) MYSQLND_STRING conn_str
 #define MYSQLND_MS_CONN_DV_STRINGL(conn_str) MYSQLND_MS_CONN_D_STRINGL(conn_str)
 #define MYSQLND_MS_CONN_A_STRINGL(conn_str) conn_str
