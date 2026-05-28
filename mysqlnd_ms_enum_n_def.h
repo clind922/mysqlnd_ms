@@ -319,8 +319,10 @@ static zend_always_inline int _ms_hash_str_get_current_key(HashTable *ht, char *
 #define _ms_mysqlnd_error_info_init(error_info) mysqlnd_error_info_init(error_info, 0)
 #define _ms_mysqlnd_error_info_free_contents(error_info) mysqlnd_error_info_free_contents(error_info)
 
+#if PHP_VERSION_ID < 80500
 #define MYSQLND_MS_CONN_STRING(conn_str) (conn_str).s
 #define MYSQLND_MS_CONN_STRING_LEN(conn_str) (conn_str).l
+#endif
 #define MYSQLND_MS_CONN_D_STRINGL(conn_str) MYSQLND_STRING conn_str
 #define MYSQLND_MS_CONN_DV_STRINGL(conn_str) MYSQLND_MS_CONN_D_STRINGL(conn_str)
 #define MYSQLND_MS_CONN_A_STRINGL(conn_str) conn_str
@@ -341,9 +343,11 @@ static zend_always_inline int _ms_hash_str_get_current_key(HashTable *ht, char *
 #define MYSQLND_MS_CONN_STRING_FREE MYSQLND_MS_CONN_STRINGL_FREE
 #define MYSQLND_MS_S_TO_CONN_STRINGL(conn_str, str, str_len) (conn_str).s = str; (conn_str).l = str_len
 #define MYSQLND_MS_S_TO_CONN_STRING(conn_str, str) MYSQLND_MS_S_TO_CONN_STRINGL(conn_str, str, strlen(str))
+#if PHP_VERSION_ID < 80500
 #define MYSQLND_MS_CONN_HOST(conn) conn->hostname
 #define MYSQLND_MS_CONN_USER(conn) conn->username
 #define MYSQLND_MS_CONN_PASS(conn) conn->password
+#endif
 #define _ms_mysqlnd_plugin_get_plugin_connection_data_data(conn, plugin_id) ((void *)((char *)conn + sizeof(MYSQLND_CONN_DATA) + plugin_id * sizeof(void *)))
 #define _ms_mysqlnd_plugin_get_plugin_stmt_data(stmt, plugin_id) ((void *)((char *)stmt + sizeof(MYSQLND_STMT) + plugin_id * sizeof(void *)))
 #define _ms_mysqlnd_conn_get_methods() (&mysqlnd_mysqlnd_conn_methods)
